@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>美容師国家試験対策クイズ</title>
+    <title>美容師国家試験対策</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🎓 美容師国家試験対策クイズ</h1>
-            <p class="subtitle">2025年試験対応 - 160問の厳選過去問で効率学習</p>
+            <h1>🎓 美容師国家試験対策</h1>
+            <p class="subtitle">2025年試験対応 - 過去問で効率学習</p>
         </header>
 
         <main>
@@ -20,8 +20,15 @@
                 <h2>📚 出題科目を選択</h2>
                 
                 <div class="subjects-grid">
-                    <!-- 実践形式（全科目）55問のみ -->
-                    <div class="subject-item special-mode">
+                    <!-- クイック（ランダム10問） -->
+                    <div class="subject-item quick-mode">
+                        <input type="checkbox" id="quick-random" value="quick-random" data-questions="10">
+                        <label for="quick-random">🚀 クイック（ランダム10問）</label>
+                        <span class="question-count">10問</span>
+                    </div>
+                    
+                    <!-- 実践形式（全科目55問） -->
+                    <div class="subject-item practice-mode">
                         <input type="checkbox" id="practice-all" value="practice-all" data-questions="55">
                         <label for="practice-all">📝 実践形式（全科目）</label>
                         <span class="question-count">55問</span>
@@ -29,69 +36,68 @@
                     
                     <!-- 個別科目選択 -->
                     <div class="subject-item">
-                        <input type="checkbox" id="regulations" value="関係法規・制度及び運営管理" data-questions="20">
+                        <input type="checkbox" id="regulations" value="関係法規・制度及び運営管理" data-questions="12">
                         <label for="regulations">⚖️ 関係法規・制度及び運営管理</label>
-                        <span class="question-count">20問</span>
+                        <span class="question-count">12問</span>
                     </div>
                     
                     <div class="subject-item">
-                        <input type="checkbox" id="public-health" value="公衆衛生・環境衛生" data-questions="20">
+                        <input type="checkbox" id="public-health" value="公衆衛生・環境衛生" data-questions="12">
                         <label for="public-health">🏥 公衆衛生・環境衛生</label>
-                        <span class="question-count">20問</span>
+                        <span class="question-count">12問</span>
                     </div>
                     
                     <div class="subject-item">
-                        <input type="checkbox" id="infection" value="感染症" data-questions="20">
+                        <input type="checkbox" id="infection" value="感染症" data-questions="12">
                         <label for="infection">🦠 感染症</label>
-                        <span class="question-count">20問</span>
+                        <span class="question-count">12問</span>
                     </div>
                     
                     <div class="subject-item">
-                        <input type="checkbox" id="hygiene" value="衛生管理技術" data-questions="20">
+                        <input type="checkbox" id="hygiene" value="衛生管理技術" data-questions="12">
                         <label for="hygiene">🧼 衛生管理技術</label>
-                        <span class="question-count">20問</span>
+                        <span class="question-count">12問</span>
                     </div>
                     
                     <div class="subject-item">
-                        <input type="checkbox" id="anatomy" value="人体の構造及び機能" data-questions="20">
+                        <input type="checkbox" id="anatomy" value="人体の構造及び機能" data-questions="12">
                         <label for="anatomy">🫀 人体の構造及び機能</label>
-                        <span class="question-count">20問</span>
+                        <span class="question-count">12問</span>
                     </div>
                     
                     <div class="subject-item">
-                        <input type="checkbox" id="dermatology" value="皮膚科学" data-questions="20">
+                        <input type="checkbox" id="dermatology" value="皮膚科学" data-questions="12">
                         <label for="dermatology">🧴 皮膚科学</label>
-                        <span class="question-count">20問</span>
+                        <span class="question-count">12問</span>
                     </div>
                     
                     <div class="subject-item">
-                        <input type="checkbox" id="chemistry" value="香粧品化学" data-questions="20">
+                        <input type="checkbox" id="chemistry" value="香粧品化学" data-questions="12">
                         <label for="chemistry">🧪 香粧品化学</label>
-                        <span class="question-count">20問</span>
+                        <span class="question-count">12問</span>
                     </div>
                     
                     <div class="subject-item">
-                        <input type="checkbox" id="technique" value="文化論及び美容技術理論" data-questions="20">
+                        <input type="checkbox" id="technique" value="文化論及び美容技術理論" data-questions="12">
                         <label for="technique">✂️ 文化論及び美容技術理論</label>
-                        <span class="question-count">20問</span>
+                        <span class="question-count">12問</span>
                     </div>
                 </div>
                 
                 <div class="selection-summary">
-                    <p>選択科目数: <span id="selected-subjects-count">0</span>科目</p>
-                    <p>出題問題数: <span id="total-questions-count">0</span>問</p>
+                    <p>選択科目数: <span id="selected-subjects-count">0</span>科目 | 出題問題数: <span id="total-questions-count">0</span>問</p>
                 </div>
                 
-                <button id="start-quiz" class="btn primary" disabled>クイズ開始</button>
+                <button id="start-test" class="btn primary" disabled>テスト開始</button>
             </section>
 
-            <!-- クイズ画面 -->
-            <section id="quiz-section" class="section">
-                <div class="quiz-header">
+            <!-- テスト画面 -->
+            <section id="test-section" class="section">
+                <div class="test-header">
                     <div class="progress-bar">
                         <div class="progress-fill"></div>
                     </div>
-                    <div class="quiz-info">
+                    <div class="test-info">
                         <span>問題 <span id="current-question">1</span> / <span id="total-questions">0</span></span>
                         <span id="current-subject" class="subject-badge"></span>
                     </div>
@@ -102,10 +108,10 @@
                     <div id="choices-container" class="choices"></div>
                 </div>
                 
-                <div class="quiz-controls">
+                <div class="test-controls">
                     <button id="prev-question" class="btn secondary" disabled>前の問題</button>
                     <button id="next-question" class="btn primary" disabled>次の問題</button>
-                    <button id="finish-quiz" class="btn primary" style="display: none;">結果を見る</button>
+                    <button id="finish-test" class="btn primary" style="display: none;">結果を見る</button>
                 </div>
                 
                 <div id="explanation-panel" class="explanation-panel" style="display: none;">
@@ -117,7 +123,7 @@
             <!-- 結果画面 -->
             <section id="results-section" class="section">
                 <div class="results-container">
-                    <h2>📊 クイズ結果</h2>
+                    <h2>📊 テスト結果</h2>
                     <div class="score-display">
                         <div class="score-circle">
                             <span id="score-percentage">0%</span>
@@ -132,7 +138,7 @@
                     
                     <div class="action-buttons">
                         <button id="review-incorrect" class="btn secondary">間違えた問題を復習</button>
-                        <button id="restart-quiz" class="btn primary">新しいクイズを開始</button>
+                        <button id="restart-test" class="btn primary">新しくスタート</button>
                     </div>
                 </div>
             </section>
