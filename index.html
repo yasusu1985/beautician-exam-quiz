@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美容師国家試験対策</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>美容師国家試験対策</h1>
+            <p>効率的な学習で合格を目指そう！</p>
+        </header>
+
+        <!-- 科目選択画面 -->
+        <div id="subjectSelection" class="screen">
+            <h2>出題形式を選択してください</h2>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="startQuickTest()">クイック（10問）</button>
+                <button class="btn btn-primary" onclick="startPracticeTest()">実践形式（55問）</button>
+            </div>
+
+            <h3>科目別選択</h3>
+            <div class="subject-grid">
+                <button class="btn btn-subject" onclick="startSubjectTest('kanseigaku')">関係法規・制度</button>
+                <button class="btn btn-subject" onclick="startSubjectTest('eiseigaku')">衛生管理</button>
+                <button class="btn btn-subject" onclick="startSubjectTest('biyougaku')">美容の物理・化学</button>
+                <button class="btn btn-subject" onclick="startSubjectTest('biyou_gijutsu')">美容技術理論</button>
+                <button class="btn btn-subject" onclick="startSubjectTest('biyou_unyo')">美容運営管理</button>
+                <button class="btn btn-subject" onclick="startSubjectTest('jinntaigaku')">人体の構造及び機能</button>
+                <button class="btn btn-subject" onclick="startSubjectTest('hifugaku')">皮膚科学</button>
+                <button class="btn btn-subject" onclick="startSubjectTest('cosmetic')">香粧品化学</button>
+            </div>
+        </div>
+
+        <!-- 問題画面 -->
+        <div id="questionScreen" class="screen hidden">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div id="progressBar" class="progress-fill"></div>
+                </div>
+                <div class="progress-text">
+                    <span id="currentQuestion">1</span> / <span id="totalQuestions">10</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 id="questionText">問題文がここに表示されます</h2>
+                <div id="questionOptions" class="options-container">
+                    <!-- 選択肢がここに表示される -->
+                </div>
+                <div class="button-group">
+                    <button id="nextButton" class="btn btn-primary" onclick="nextQuestion()" disabled>次の問題</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 結果画面 -->
+        <div id="resultScreen" class="screen hidden">
+            <div class="result-container">
+                <h2>テスト結果</h2>
+                <div class="score-display">
+                    <div class="score-circle">
+                        <span id="scorePercentage">0%</span>
+                    </div>
+                    <div class="score-details">
+                        <p>正解数: <span id="correctCount">0</span> / <span id="totalCount">0</span></p>
+                        <p id="resultMessage">頑張りましょう！</p>
+                    </div>
+                </div>
+                <div class="result-details">
+                    <h3>詳細結果</h3>
+                    <div id="detailResults"></div>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="reviewWrongAnswers()">間違えた問題を復習</button>
+                    <button class="btn btn-primary" onclick="newStart()">新しくスタート</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025美容師国家試験対策</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
