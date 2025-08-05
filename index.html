@@ -4,150 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>美容師国家試験対策</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🎓 美容師国家試験対策</h1>
-            <p class="subtitle">2025年試験対応 - 過去問で効率学習</p>
+            <h1>美容師国家試験対策</h1>
+            <p>効率的な学習で合格を目指そう！</p>
         </header>
 
-        <main>
-            <!-- 科目選択画面 -->
-            <section id="subject-selection" class="section active">
-                <h2>📚 出題科目を選択</h2>
-                
-                <div class="subjects-grid">
-                    <!-- クイック（ランダム10問） -->
-                    <div class="subject-item quick-mode">
-                        <input type="checkbox" id="quick-random" value="quick-random" data-questions="10">
-                        <label for="quick-random">🚀 クイック（ランダム10問）</label>
-                        <span class="question-count">10問</span>
-                    </div>
-                    
-                    <!-- 実践形式（全科目55問） -->
-                    <div class="subject-item practice-mode">
-                        <input type="checkbox" id="practice-all" value="practice-all" data-questions="55">
-                        <label for="practice-all">📝 実践形式（全科目）</label>
-                        <span class="question-count">55問</span>
-                    </div>
-                    
-                    <!-- 個別科目選択 -->
-                    <div class="subject-item">
-                        <input type="checkbox" id="regulations" value="関係法規・制度及び運営管理" data-questions="12">
-                        <label for="regulations">⚖️ 関係法規・制度及び運営管理</label>
-                        <span class="question-count">12問</span>
-                    </div>
-                    
-                    <div class="subject-item">
-                        <input type="checkbox" id="public-health" value="公衆衛生・環境衛生" data-questions="12">
-                        <label for="public-health">🏥 公衆衛生・環境衛生</label>
-                        <span class="question-count">12問</span>
-                    </div>
-                    
-                    <div class="subject-item">
-                        <input type="checkbox" id="infection" value="感染症" data-questions="12">
-                        <label for="infection">🦠 感染症</label>
-                        <span class="question-count">12問</span>
-                    </div>
-                    
-                    <div class="subject-item">
-                        <input type="checkbox" id="hygiene" value="衛生管理技術" data-questions="12">
-                        <label for="hygiene">🧼 衛生管理技術</label>
-                        <span class="question-count">12問</span>
-                    </div>
-                    
-                    <div class="subject-item">
-                        <input type="checkbox" id="anatomy" value="人体の構造及び機能" data-questions="12">
-                        <label for="anatomy">🫀 人体の構造及び機能</label>
-                        <span class="question-count">12問</span>
-                    </div>
-                    
-                    <div class="subject-item">
-                        <input type="checkbox" id="dermatology" value="皮膚科学" data-questions="12">
-                        <label for="dermatology">🧴 皮膚科学</label>
-                        <span class="question-count">12問</span>
-                    </div>
-                    
-                    <div class="subject-item">
-                        <input type="checkbox" id="chemistry" value="香粧品化学" data-questions="12">
-                        <label for="chemistry">🧪 香粧品化学</label>
-                        <span class="question-count">12問</span>
-                    </div>
-                    
-                    <div class="subject-item">
-                        <input type="checkbox" id="technique" value="文化論及び美容技術理論" data-questions="12">
-                        <label for="technique">✂️ 文化論及び美容技術理論</label>
-                        <span class="question-count">12問</span>
-                    </div>
-                </div>
-                
-                <div class="selection-summary">
-                    <p>選択科目数: <span id="selected-subjects-count">0</span>科目 | 出題問題数: <span id="total-questions-count">0</span>問</p>
-                </div>
-                
-                <button id="start-test" class="btn primary" disabled>テスト開始</button>
-            </section>
+        <!-- 科目選択画面 -->
+        <div id="subjectSelection" class="screen">
+            <h2>出題形式を選択してください</h2>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="startQuickTest()">クイック（10問）</button>
+                <button class="btn btn-primary" onclick="startPracticeTest()">実践形式（55問）</button>
+            </div>
+            
+            <h3>科目別選択</h3>
+            <div class="subject-grid">
+                <button class="btn btn-subject" onclick="startSubjectTest('kanseigaku')">関係法規・制度</button>
+                <button class="btn btn-subject" onclick="startSubjectTest('eiseigaku')">衛生管理</button>
+                <button class="btn btn-subject" onclick="startSubjectTest('biyougaku')">美容の物理・化学</button>
+                <button class="btn btn-subject" onclick="startSubjectTest('biyou_gijutsu')">美容技術理論</button>
+                <button class="btn btn-subject" onclick="startSubjectTest('biyou_unyo')">美容運営管理</button>
+                <button class="btn btn-subject" onclick="startSubjectTest('jinntaigaku')">人体の構造及び機能</button>
+                <button class="btn btn-subject" onclick="startSubjectTest('hifugaku')">皮膚科学</button>
+                <button class="btn btn-subject" onclick="startSubjectTest('cosmetic')">香粧品化学</button>
+            </div>
+        </div>
 
-            <!-- テスト画面 -->
-            <section id="test-section" class="section">
-                <div class="test-header">
-                    <div class="progress-bar">
-                        <div class="progress-fill"></div>
-                    </div>
-                    <div class="test-info">
-                        <span>問題 <span id="current-question">1</span> / <span id="total-questions">0</span></span>
-                        <span id="current-subject" class="subject-badge"></span>
-                    </div>
+        <!-- 問題画面 -->
+        <div id="questionScreen" class="screen hidden">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div id="progressBar" class="progress-fill"></div>
                 </div>
-                
-                <div class="question-container">
-                    <h3 id="question-text"></h3>
-                    <div id="choices-container" class="choices"></div>
+                <div class="progress-text">
+                    <span id="currentQuestion">1</span> / <span id="totalQuestions">10</span>
                 </div>
-                
-                <div class="test-controls">
-                    <button id="prev-question" class="btn secondary" disabled>前の問題</button>
-                    <button id="next-question" class="btn primary" disabled>次の問題</button>
-                    <button id="finish-test" class="btn primary" style="display: none;">結果を見る</button>
-                </div>
-                
-                <div id="explanation-panel" class="explanation-panel" style="display: none;">
-                    <h4>解説</h4>
-                    <p id="explanation-text"></p>
-                </div>
-            </section>
+            </div>
 
-            <!-- 結果画面 -->
-            <section id="results-section" class="section">
-                <div class="results-container">
-                    <h2>📊 テスト結果</h2>
-                    <div class="score-display">
-                        <div class="score-circle">
-                            <span id="score-percentage">0%</span>
-                        </div>
-                        <p>正解数: <span id="correct-answers">0</span> / <span id="total-answered">0</span></p>
+            <div class="question-container">
+                <h2 id="questionText">問題文がここに表示されます</h2>
+                <div id="questionOptions" class="options-container">
+                    <!-- 選択肢がここに表示される -->
+                </div>
+                <div class="button-group">
+                    <button id="nextButton" class="btn btn-primary" onclick="nextQuestion()" disabled>次の問題</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 結果画面 -->
+        <div id="resultScreen" class="screen hidden">
+            <div class="result-container">
+                <h2>テスト結果</h2>
+                <div class="score-display">
+                    <div class="score-circle">
+                        <span id="scorePercentage">0%</span>
                     </div>
-                    
-                    <div class="subject-breakdown">
-                        <h3>科目別結果</h3>
-                        <div id="subject-results"></div>
-                    </div>
-                    
-                    <div class="action-buttons">
-                        <button id="review-incorrect" class="btn secondary">間違えた問題を復習</button>
-                        <button id="restart-test" class="btn primary">新しくスタート</button>
+                    <div class="score-details">
+                        <p>正解数: <span id="correctCount">0</span> / <span id="totalCount">0</span></p>
+                        <p id="resultMessage">頑張りましょう！</p>
                     </div>
                 </div>
-            </section>
-        </main>
-
-        <footer>
-            <p>© 2025美容師国家試験対策</p>
-        </footer>
+                <div class="result-details">
+                    <h3>詳細結果</h3>
+                    <div id="detailResults"></div>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="reviewWrongAnswers()">間違えた問題を復習</button>
+                    <button class="btn btn-primary" onclick="newStart()">新しくスタート</button>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <footer>
+        <p>© 2025美容師国家試験対策</p>
+    </footer>
 
     <script src="js/app.js"></script>
 </body>
