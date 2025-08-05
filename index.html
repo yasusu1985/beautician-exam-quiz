@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美容師国家試験 選択式学習ツール</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">
+                <span class="icon">📚</span>
+                美容師国家試験 選択式学習ツール
+            </h1>
+            <p class="subtitle">過去問を活用した効率的な学習で合格を目指そう！</p>
+        </header>
+
+        <!-- 統計情報 -->
+        <div class="stats-panel">
+            <div class="stat-item">
+                <span class="stat-number" id="totalQuestions">0</span>
+                <span class="stat-label">総問題数</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="correctAnswers">0</span>
+                <span class="stat-label">正解数</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="accuracyRate">0%</span>
+                <span class="stat-label">正答率</span>
+            </div>
+        </div>
+
+        <!-- 科目選択画面 -->
+        <div id="subjectSelection" class="content-panel">
+            <h2 class="section-title">📋 科目を選択してください</h2>
+            <div class="subject-grid">
+                <button class="subject-btn" data-subject="関係法規" data-ratio="20%">
+                    <span class="subject-icon">⚖️</span>
+                    <span class="subject-name">関係法規・制度</span>
+                    <span class="subject-ratio">出題割合: 20%</span>
+                </button>
+                <button class="subject-btn" data-subject="衛生管理" data-ratio="20%">
+                    <span class="subject-icon">🧼</span>
+                    <span class="subject-name">衛生管理技術</span>
+                    <span class="subject-ratio">出題割合: 20%</span>
+                </button>
+                <button class="subject-btn" data-subject="保健" data-ratio="15%">
+                    <span class="subject-icon">🏥</span>
+                    <span class="subject-name">公衆衛生・環境衛生</span>
+                    <span class="subject-ratio">出題割合: 15%</span>
+                </button>
+                <button class="subject-btn" data-subject="香粧品化学" data-ratio="15%">
+                    <span class="subject-icon">🧪</span>
+                    <span class="subject-name">香粧品化学</span>
+                    <span class="subject-ratio">出題割合: 15%</span>
+                </button>
+                <button class="subject-btn" data-subject="美容技術理論" data-ratio="20%">
+                    <span class="subject-icon">✂️</span>
+                    <span class="subject-name">美容技術理論</span>
+                    <span class="subject-ratio">出題割合: 20%</span>
+                </button>
+                <button class="subject-btn" data-subject="運営管理" data-ratio="10%">
+                    <span class="subject-icon">📊</span>
+                    <span class="subject-name">運営管理</span>
+                    <span class="subject-ratio">出題割合: 10%</span>
+                </button>
+            </div>
+
+            <div class="all-subjects-section">
+                <button id="allSubjectsBtn" class="all-subjects-btn">
+                    <span class="subject-icon">📚</span>
+                    <span class="subject-name">全科目混合</span>
+                    <span class="subject-ratio">ランダム出題</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- クイズ画面 -->
+        <div id="quizSection" class="content-panel" style="display: none;">
+            <div class="quiz-header">
+                <button id="backToSubjects" class="back-btn">← 科目選択に戻る</button>
+                <div class="progress-info">
+                    <span id="currentSubject" class="current-subject"></span>
+                    <span id="questionCounter" class="question-counter">問題 1/10</span>
+                </div>
+            </div>
+
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+
+            <div class="question-section">
+                <h3 id="questionText" class="question-text"></h3>
+                <div id="choicesContainer" class="choices-container"></div>
+
+                <div class="action-buttons">
+                    <button id="submitAnswer" class="submit-btn" disabled>回答する</button>
+                    <button id="nextQuestion" class="next-btn" style="display: none;">次の問題へ</button>
+                </div>
+            </div>
+
+            <!-- 解説パネル -->
+            <div id="explanationPanel" class="explanation-panel" style="display: none;">
+                <div class="explanation-header">
+                    <span id="resultIcon" class="result-icon"></span>
+                    <span id="resultText" class="result-text"></span>
+                </div>
+                <div id="explanationText" class="explanation-text"></div>
+            </div>
+        </div>
+
+        <!-- 結果画面 -->
+        <div id="resultSection" class="content-panel" style="display: none;">
+            <div class="result-summary">
+                <h2 class="section-title">📊 学習結果</h2>
+                <div class="final-score">
+                    <span id="finalScore" class="final-score-number">0/0</span>
+                    <span class="final-score-label">正解数</span>
+                </div>
+                <div class="final-accuracy">
+                    <span id="finalAccuracy" class="final-accuracy-number">0%</span>
+                    <span class="final-accuracy-label">正答率</span>
+                </div>
+
+                <div class="result-message">
+                    <p id="resultMessage" class="message-text"></p>
+                </div>
+
+                <div class="result-actions">
+                    <button id="retryQuiz" class="retry-btn">同じ科目をもう一度</button>
+                    <button id="newSubject" class="new-subject-btn">別の科目に挑戦</button>
+                </div>
+            </div>
+
+            <!-- 間違えた問題の復習 -->
+            <div id="reviewSection" class="review-section" style="display: none;">
+                <h3 class="review-title">📝 復習が必要な問題</h3>
+                <div id="reviewList" class="review-list"></div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>美容師国家試験の過去問を参考に作成されています。実際の試験では最新の出題傾向を必ずご確認ください。</p>
+        </footer>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
