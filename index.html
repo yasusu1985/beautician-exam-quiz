@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨美容師国家試験対策✨</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="bubble bubble1"></div>
+        <div class="bubble bubble2"></div>
+        <div class="bubble bubble3"></div>
+        <div class="bubble bubble4"></div>
+        <div class="bubble bubble5"></div>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="main-title">✨美容師国家試験対策✨</h1>
+                <p class="subtitle">🌈 楽しく学んで合格を目指そう！ 💫</p>
+                <div class="sparkles">
+                    <span class="sparkle">⭐</span>
+                    <span class="sparkle">💎</span>
+                    <span class="sparkle">🌟</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- メニュー画面 -->
+        <div id="menuScreen" class="screen">
+            <div class="menu-card">
+                <h2 class="section-title">🎯 出題形式を選択</h2>
+                <div class="mode-buttons">
+                    <button class="mode-btn quick-mode" onclick="startQuickTest()">
+                        <div class="btn-icon">⚡</div>
+                        <div class="btn-text">
+                            <h3>クイック</h3>
+                            <p>ランダム10問</p>
+                        </div>
+                    </button>
+                    <button class="mode-btn practice-mode" onclick="startPracticeTest()">
+                        <div class="btn-icon">🎓</div>
+                        <div class="btn-text">
+                            <h3>実践形式</h3>
+                            <p>本番形式55問</p>
+                        </div>
+                    </button>
+                </div>
+
+                <h2 class="section-title">📚 科目別学習</h2>
+                <div class="subject-grid">
+                    <button class="subject-btn law-btn" onclick="startSubjectTest('kanseigaku')">
+                        <div class="subject-icon">💼</div>
+                        <div class="subject-name">関係法規・制度</div>
+                        <div class="subject-count">20問</div>
+                    </button>
+                    <button class="subject-btn hygiene-btn" onclick="startSubjectTest('eiseigaku')">
+                        <div class="subject-icon">🧼</div>
+                        <div class="subject-name">衛生管理</div>
+                        <div class="subject-count">20問</div>
+                    </button>
+                    <button class="subject-btn chemistry-btn" onclick="startSubjectTest('biyougaku')">
+                        <div class="subject-icon">⚗️</div>
+                        <div class="subject-name">美容の物理・化学</div>
+                        <div class="subject-count">20問</div>
+                    </button>
+                    <button class="subject-btn technique-btn" onclick="startSubjectTest('biyou_gijutsu')">
+                        <div class="subject-icon">✂️</div>
+                        <div class="subject-name">美容技術理論</div>
+                        <div class="subject-count">20問</div>
+                    </button>
+                    <button class="subject-btn management-btn" onclick="startSubjectTest('biyou_unyo')">
+                        <div class="subject-icon">📊</div>
+                        <div class="subject-name">美容運営管理</div>
+                        <div class="subject-count">20問</div>
+                    </button>
+                    <button class="subject-btn anatomy-btn" onclick="startSubjectTest('jinntaigaku')">
+                        <div class="subject-icon">🫀</div>
+                        <div class="subject-name">人体の構造及び機能</div>
+                        <div class="subject-count">20問</div>
+                    </button>
+                    <button class="subject-btn dermatology-btn" onclick="startSubjectTest('hifugaku')">
+                        <div class="subject-icon">🌿</div>
+                        <div class="subject-name">皮膚科学</div>
+                        <div class="subject-count">20問</div>
+                    </button>
+                    <button class="subject-btn cosmetic-btn" onclick="startSubjectTest('cosmetic')">
+                        <div class="subject-icon">💄</div>
+                        <div class="subject-name">香粧品化学</div>
+                        <div class="subject-count">20問</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 問題画面 -->
+        <div id="questionScreen" class="screen hidden">
+            <div class="question-card">
+                <div class="progress-section">
+                    <div class="progress-info">
+                        <span class="progress-text">
+                            <span id="currentQuestion">1</span> / <span id="totalQuestions">10</span> 問目
+                        </span>
+                        <div class="progress-percentage" id="progressPercentage">10%</div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                </div>
+
+                <div class="question-content">
+                    <h2 class="question-title">📝 問題</h2>
+                    <div class="question-text" id="questionText">
+                        問題文がここに表示されます
+                    </div>
+                </div>
+
+                <div class="options-section">
+                    <h3 class="options-title">🌈 選択肢</h3>
+                    <div id="optionsContainer" class="options-grid">
+                        <!-- 選択肢がここに表示される -->
+                    </div>
+                </div>
+
+                <div class="question-actions">
+                    <button id="nextBtn" class="next-btn" onclick="nextQuestion()" disabled>
+                        次の問題へ ➡️
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 結果画面 -->
+        <div id="resultScreen" class="screen hidden">
+            <div class="result-card">
+                <div class="result-header">
+                    <div class="result-emoji" id="resultEmoji">🎉</div>
+                    <h2 class="result-title">📊 テスト結果</h2>
+                </div>
+
+                <div class="score-section">
+                    <div class="score-circle">
+                        <div class="score-value" id="scoreValue">0%</div>
+                        <div class="score-label">正答率</div>
+                    </div>
+                    <div class="score-details">
+                        <div class="score-item correct-score">
+                            <div class="score-icon">✅</div>
+                            <div class="score-info">
+                                <span class="score-number" id="correctCount">0</span>
+                                <span class="score-text">正解</span>
+                            </div>
+                        </div>
+                        <div class="score-item total-score">
+                            <div class="score-icon">📝</div>
+                            <div class="score-info">
+                                <span class="score-number" id="totalCount">0</span>
+                                <span class="score-text">問題数</span>
+                            </div>
+                        </div>
+                        <div class="score-item wrong-score">
+                            <div class="score-icon">❌</div>
+                            <div class="score-info">
+                                <span class="score-number" id="wrongCount">0</span>
+                                <span class="score-text">不正解</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-message">
+                    <p id="resultMessage">頑張りましょう！</p>
+                </div>
+
+                <div class="result-details">
+                    <h3 class="details-title">📋 詳細結果</h3>
+                    <div id="detailsContainer" class="details-container">
+                        <!-- 詳細結果がここに表示される -->
+                    </div>
+                </div>
+
+                <div class="result-actions">
+                    <button class="action-btn review-btn" onclick="reviewWrongAnswers()">
+                        <div class="btn-icon">🔄</div>
+                        <div class="btn-text">間違えた問題を復習</div>
+                    </button>
+                    <button class="action-btn restart-btn" onclick="newStart()">
+                        <div class="btn-icon">🏠</div>
+                        <div class="btn-text">メニューに戻る</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2025美容師国家試験対策 ✨</p>
+            <div class="footer-sparkles">
+                <span>🌟</span>
+                <span>💎</span>
+                <span>✨</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
